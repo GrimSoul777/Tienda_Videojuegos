@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Tienda de videojuegos</a>
+  <a class="navbar-brand" href="#">Tienda</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -15,7 +15,7 @@
         <a class="nav-link {{ request()->is('desarrolladora*') ? 'active' : '' }}"href="{{ route('getdesarrolladoras') }}">Desarrolladoras</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Plataformas</a>
+        <a class="nav-link {{ request()->is('plataforma*') ? 'active' : '' }}" href="{{ route('getplataformas') }}">Plataformas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ request()->is('cliente*') ? 'active' : '' }}"href="{{ route('getclientes') }}">Clientes</a>
@@ -24,7 +24,7 @@
         <a class="nav-link" href="#">Inventario</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Metodos de pago</a>
+        <a class="nav-link {{ request()->is('metodopago*') ? 'active' : '' }}" href="{{ route('getmetodospago') }}">Metodos de pago</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Ventas</a>
