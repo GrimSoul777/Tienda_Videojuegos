@@ -9,16 +9,16 @@
         <a class="nav-link" href="#">Videojuegos <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Categorías</a>
+        <a class="nav-link {{ request()->is('categoria*') ? 'active' : '' }}"href="{{ route('getcategorias') }}">Categorías</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Desarrolladores</a>
+        <a class="nav-link {{ request()->is('desarrolladora*') ? 'active' : '' }}"href="{{ route('getdesarrolladoras') }}">Desarrolladoras</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Plataformas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Clientes</a>
+        <a class="nav-link {{ request()->is('cliente*') ? 'active' : '' }}"href="{{ route('getclientes') }}">Clientes</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Inventario</a>
