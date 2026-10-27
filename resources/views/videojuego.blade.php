@@ -4,25 +4,6 @@
 
 @section('content')
     <h1 class="text-center my-4">Videojuegos</h1>
-
-    @if (session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ session('error') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
-
-    @if (session('mensaje'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('mensaje') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
     @auth
     @if (in_array(auth()->user()->rol->nombre, ['Administrador', 'Empleado']))
         <div class="text-center mb-4">

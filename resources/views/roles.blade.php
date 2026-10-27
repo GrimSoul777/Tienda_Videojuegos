@@ -14,13 +14,6 @@
 
     <div class="row mt-3">
         <div class="col-lg-10 offset-lg-1">
-
-            @if (session('mensaje'))
-                <div class="alert alert-success">
-                    {{ session('mensaje') }}
-                </div>
-            @endif
-
             <table class="table table-bordered align-middle">
                 <thead class="thead-dark">
                     <tr>

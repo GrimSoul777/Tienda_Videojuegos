@@ -4,13 +4,6 @@
 
 @section('content')
     <h1 class="text-center my-4">Reseñas</h1>
-
-    @if (session('mensaje'))
-        <div class="alert alert-success">
-            {{ session('mensaje') }}
-        </div>
-    @endif
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="mb-0">
