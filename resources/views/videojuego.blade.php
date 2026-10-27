@@ -23,9 +23,13 @@
         </div>
     @endif
 
-    <div class="text-center mb-4">
-        <x-create-videojuegos/>
-    </div>
+    @auth
+    @if (in_array(auth()->user()->rol->nombre, ['Administrador', 'Empleado']))
+        <div class="text-center mb-4">
+            <x-create-videojuegos/>
+        </div>
+    @endif
+    @endauth
 
     <div class="row">
         @forelse ($videojuegos->sortBy('titulo') as $i)
@@ -67,8 +71,12 @@
                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#verVideojuego{{ $i->id_videojuego }}">
                             Ver
                         </button>
-                        <x-update-videojuegos :i="$i"/>
-                        <x-delete-videojuegos :i="$i"/>
+                        @auth
+                            @if (in_array(auth()->user()->rol->nombre, ['Administrador', 'Empleado']))
+                                <x-update-videojuegos :i="$i"/>
+                                <x-delete-videojuegos :i="$i"/>
+                            @endif
+                        @endauth
                     </div>
                 </div>
 

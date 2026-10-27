@@ -1,3 +1,4 @@
+
 @props(['i'])
 
 <button type="button" class="btn btn-warning btn-sm"
@@ -32,13 +33,13 @@
                 <div class="modal-body text-left">
 
                     <p>
-                        <strong>Cliente:</strong>
-                        {{ $i->cliente->nombre ?? 'Sin cliente' }}
+                        <strong>Usuario:</strong>
+                        {{ $i->usuario?->nombre ?? 'Sin usuario' }}
                     </p>
 
                     <p>
                         <strong>Videojuego:</strong>
-                        {{ $i->videojuego->nombre ?? 'Sin videojuego' }}
+                        {{ $i->videojuego?->titulo ?? 'Sin videojuego' }}
                     </p>
 
                     <div class="form-group">
@@ -47,7 +48,9 @@
                         <select name="calificacion" class="form-control" required>
                             @for ($n = 1; $n <= 5; $n++)
                                 <option value="{{ $n }}"
-                                    {{ (old('form') === 'update' . $i->id_resena ? old('calificacion') : $i->calificacion) == $n ? 'selected' : '' }}>
+                                    {{ (old('form') === 'update' . $i->id_resena
+                                        ? old('calificacion')
+                                        : $i->calificacion) == $n ? 'selected' : '' }}>
                                     {{ $n }} / 5
                                 </option>
                             @endfor

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Resena;
 
 class User extends Authenticatable
 {
@@ -39,6 +41,15 @@ class User extends Authenticatable
             Rol::class,
             'id_rol',
             'id_rol'
+        );
+    }
+
+    public function resenas(): HasMany
+    {
+        return $this->hasMany(
+            Resena::class,
+            'id_usuario',
+            'id_usuario'
         );
     }
 }

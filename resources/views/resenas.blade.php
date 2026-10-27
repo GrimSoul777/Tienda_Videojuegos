@@ -11,23 +11,32 @@
         </div>
     @endif
 
-    @if (auth()->check() && auth()->user()->rol->nombre === 'Cliente')
-    <div class="row">
-        <div class="col-md-6 offset-md-3 text-center">
-            <x-create-resena
-                :clientes="$clientes"
-                :videojuegos="$videojuegos" />
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-    </div>
+    @endif
+
+    @if (auth()->check() && auth()->user()->rol?->nombre === 'Cliente')
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center">
+                <x-create-resena
+                    :videojuegos="$videojuegos" />
+            </div>
+        </div>
     @endif
 
     <div class="row mt-3">
         <div class="col-lg-11 offset-lg-1">
             <table class="table table-bordered">
-                <thead class="thead-dark">
+                <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Cliente</th>
+                        <th>Usuario</th>
                         <th>Videojuego</th>
                         <th>Calificación</th>
                         <th>Comentario</th>
@@ -42,11 +51,11 @@
                             <td>{{ $i->id_resena }}</td>
 
                             <td>
-                                {{ $i->cliente->nombre ?? 'Sin cliente' }}
+                                {{ $i->usuario?->nombre ?? 'Sin usuario' }}
                             </td>
 
                             <td>
-                                {{ $i->videojuego->nombre ?? 'Sin videojuego' }}
+                                {{ $i->videojuego?->titulo ?? 'Sin videojuego' }}
                             </td>
 
                             <td>{{ $i->calificacion }} / 5</td>
@@ -54,11 +63,15 @@
                             <td>{{ $i->comentario ?? 'Sin comentario' }}</td>
 
                             <td>
-                                {{ $i->fecha ? $i->fecha->format('d/m/Y') : 'Sin fecha' }}
+                                {{ $i->fecha?->format('d/m/Y') ?? 'Sin fecha' }}
                             </td>
 
                             <td>
-                                @if (auth()->check() && auth()->user()->rol->nombre === 'Cliente')
+                                @if (
+                                    auth()->check()
+                                    && auth()->user()->rol?->nombre === 'Cliente'
+                                    && auth()->id() === $i->id_usuario
+                                )
                                     <x-update-resena :i="$i" />
                                     <x-delete-resena :i="$i" />
                                 @else
