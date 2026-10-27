@@ -20,7 +20,7 @@
         @endphp 
         <div class="modal-body">
           <div class="mb-2">
-            <input class="form-control form-control-sm" type="text" name="nombre" value="{{ $mio ? old('nombre') : $i->nombre }}" placeholder="Nombre" required> //muestra lo que escribiste. Si no, muestra el dato original del cliente
+            <input class="form-control form-control-sm" type="text" name="nombre" value="{{ $mio ? old('nombre') : $i->nombre }}" placeholder="Nombre" required>
             @if ($mio) @error('nombre') <small class="text-danger">{{ $message }}</small> @enderror
             @endif
           </div>
@@ -35,7 +35,7 @@
             @endif
           </div>
           <div class="mb-2">
-            <input class="form-control form-control-sm" type="text" name="telefono" maxlength="20" value="{{ $mio ? old('telefono') : $i->telefono }}" placeholder="Teléfono (opcional)">
+            <input class="form-control form-control-sm" type="number" name="telefono" minlenght="10" maxlength="15" value="{{ $mio ? old('telefono') : $i->telefono }}" placeholder="Teléfono (opcional)">
             @if ($mio) @error('telefono') <small class="text-danger">{{ $message }}</small> @enderror 
             @endif
           </div>

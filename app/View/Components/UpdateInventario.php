@@ -14,6 +14,6 @@ class DeleteInventario extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.delete-inventario');
+        return view('components.update-inventario');
     }
 }

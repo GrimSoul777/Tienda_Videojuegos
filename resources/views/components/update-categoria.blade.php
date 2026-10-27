@@ -1,4 +1,6 @@
-@php $mio = old('form') === 'update' . $i->id_categoria; @endphp
+@php
+    $mio = old('form') === 'update' . $i->id_categoria;
+@endphp
 
 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateCategoria{{ $i->id_categoria }}">
     Actualizar
@@ -20,7 +22,7 @@
                 <div class="modal-body text-left">
                     <div class="form-group">
                         <input class="form-control" type="text" name="nombre"
-                               value="{{ $mio ? old('nombre') : $i->nombre }}">
+                            value="{{ $mio ? old('nombre') : $i->nombre }}">
                         @if ($mio) @error('nombre') <small class="text-danger">{{ $message }}</small> @enderror @endif
                     </div>
                     <div class="form-group">

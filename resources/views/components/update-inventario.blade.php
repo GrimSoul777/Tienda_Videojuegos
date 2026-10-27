@@ -21,14 +21,12 @@
         <div class="modal-body">
           <div class="form-group">
             <label class="small mb-1">Stock</label>
-            <input class="form-control form-control-sm" type="number" name="stock" min="0" step="1"
-                   value="{{ $mio ? old('stock') : $i->stock }}" required>
+            <input class="form-control form-control-sm" type="number" name="stock" min="0" step="1" value="{{ $mio ? old('stock') : $i->stock }}" required>
             @if ($mio) @error('stock') <small class="text-danger">{{ $message }}</small> @enderror @endif
           </div>
           <div class="form-group mb-0">
             <label class="small mb-1">Ubicación</label>
-            <input class="form-control form-control-sm" type="text" name="ubicacion" maxlength="100"
-                   value="{{ $mio ? old('ubicacion') : $i->ubicacion }}" placeholder="Opcional">
+            <input class="form-control form-control-sm" type="text" name="ubicacion" maxlength="100" value="{{ $mio ? old('ubicacion') : $i->ubicacion }}" placeholder="Opcional">
             @if ($mio) @error('ubicacion') <small class="text-danger">{{ $message }}</small> @enderror @endif
           </div>
         </div>

@@ -7,8 +7,7 @@
 
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
         <x-create-inventario/>
-        <input type="search" id="buscarInv" class="form-control form-control-sm"
-               style="width: 220px" placeholder="Buscar videojuego...">
+        <input type="search" id="buscarInv" class="form-control form-control-sm" style="width: 220px" placeholder="Buscar videojuego...">
     </div>
 
     <table class="table table-bordered align-middle bg-white">

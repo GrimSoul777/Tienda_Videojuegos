@@ -5,6 +5,24 @@
 @section('content')
     <h1 class="text-center my-4">Videojuegos</h1>
 
+    @if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
+    @if (session('mensaje'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('mensaje') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <div class="text-center mb-4">
         <x-create-videojuegos/>
     </div>
@@ -14,8 +32,8 @@
             <div class="col-sm-6 col-lg-4 col-xl-3 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="d-flex align-items-center justify-content-center text-white"
-                         style="height: 140px; font-size: 3rem; font-weight: bold;
-                                background: hsl({{ ($i->id_videojuego * 47) % 360 }}, 50%, 40%);">
+                        style="height: 140px; font-size: 3rem; font-weight: bold;
+                            background: hsl({{ ($i->id_videojuego * 47) % 360 }}, 50%, 40%);">
                         {{ mb_strtoupper(mb_substr($i->titulo, 0, 1)) }}
                     </div>
 

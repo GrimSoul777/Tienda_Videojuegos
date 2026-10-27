@@ -32,14 +32,12 @@
           </div>
           <div class="form-group">
             <label class="small mb-1">Stock</label>
-            <input class="form-control form-control-sm" type="number" name="stock" min="0" step="1"
-                   value="{{ old('stock', 0) }}" required>
+            <input class="form-control form-control-sm" type="number" name="stock" min="0" step="1" value="{{ old('stock', 0) }}" required>
             @error('stock') <small class="text-danger">{{ $message }}</small> @enderror
           </div>
           <div class="form-group">
             <label class="small mb-1">Ubicación</label>
-            <input class="form-control form-control-sm" type="text" name="ubicacion" maxlength="100"
-                   value="{{ old('ubicacion') }}" placeholder="Ej. Estante A2 (opcional)">
+            <input class="form-control form-control-sm" type="text" name="ubicacion" maxlength="255" value="{{ old('ubicacion') }}" placeholder="Ej. Estante A2 (opcional)">
             @error('ubicacion') <small class="text-danger">{{ $message }}</small> @enderror
           </div>
         </div>

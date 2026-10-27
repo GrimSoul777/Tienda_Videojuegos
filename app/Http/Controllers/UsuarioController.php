@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -11,8 +12,9 @@ class UsuarioController extends Controller
     public function getUsuarios()
     {
         $usuarios = Usuario::with('rol')->get();
+    $roles = \App\Models\Rol::all();
 
-        return view('usuario', compact('usuarios'));
+    return view('usuario', compact('usuarios', 'roles'));
     }
 
     public function createUsuario(Request $request)

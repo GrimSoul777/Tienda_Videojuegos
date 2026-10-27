@@ -16,23 +16,19 @@
         <input type="hidden" name="form" value="create">
         <div class="modal-body">
           <div class="mb-2">
-            <input class="form-control form-control-sm" type="text" name="nombre"
-                   value="{{ old('nombre') }}" placeholder="Nombre" required>
+            <input class="form-control form-control-sm" type="text" name="nombre" value="{{ old('nombre') }}" placeholder="Nombre" required>
             @error('nombre') <small class="text-danger">{{ $message }}</small> @enderror
           </div>
           <div class="mb-2">
-            <input class="form-control form-control-sm" type="text" name="apellidos"
-                   value="{{ old('apellidos') }}" placeholder="Apellidos" required>
+            <input class="form-control form-control-sm" type="text" name="apellidos" value="{{ old('apellidos') }}" placeholder="Apellidos" required>
             @error('apellidos') <small class="text-danger">{{ $message }}</small> @enderror
           </div>
           <div class="mb-2">
-            <input class="form-control form-control-sm" type="email" name="email"
-                   value="{{ old('email') }}" placeholder="Correo (opcional)">
+            <input class="form-control form-control-sm" type="email" name="email" value="{{ old('email') }}" placeholder="Correo (opcional)">
             @error('email') <small class="text-danger">{{ $message }}</small> @enderror
           </div>
           <div class="mb-2">
-            <input class="form-control form-control-sm" type="text" name="telefono" maxlength="20"
-                   value="{{ old('telefono') }}" placeholder="Teléfono (opcional)">
+            <input class="form-control form-control-sm" type="number" name="telefono" minlenght="10" maxlength="15" value="{{ old('telefono') }}" placeholder="Teléfono (opcional)">
             @error('telefono') <small class="text-danger">{{ $message }}</small> @enderror
           </div>
         </div>
