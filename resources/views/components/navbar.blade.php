@@ -7,8 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link disabled {{ request()->is('videojuego*') ? 'active' : '' }}"
-           href="{{ route('getvideojuegos') }}">Videojuegos</a>
+        <a class="nav-link {{ request()->is('videojuego*') ? 'active' : '' }}"href="{{ route('getvideojuegos') }}">Videojuegos</a>
       </li>
 
       {{-- Catálogos aparte --}}
@@ -24,8 +23,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled {{ request()->is('inventario*') ? 'active' : '' }}"
-           href="{{ route('getinventario') }}">Inventario</a>
+        <a class="nav-link {{ request()->is('inventario*') ? 'active' : '' }}"href="{{ route('getinventario') }}">Inventario</a>
       </li>
 
       {{-- Ventas --}}
@@ -35,8 +33,8 @@
           Ventas
         </a>
         <div class="dropdown-menu" aria-labelledby="ddVentas">
-          <a class="dropdown-item disabled" href="{{ route('getventas') }}">Ventas</a>
-          <a class="dropdown-item disabled" href="{{ route('getdetallesventa') }}">Detalle de venta</a>
+          <a class="dropdown-item {{ request()->is('venta*') ? 'active' : '' }}" href="{{ route('getventas') }}">Ventas</a>
+          <a class="dropdown-item {{ request()->is('detalle-venta*') ? 'active' : '' }}" href="{{ route('getdetallesventa') }}">Detalle de venta</a>
           <a class="dropdown-item {{ request()->is('metodo-pago*') ? 'active' : '' }}" href="{{ route('getmetodospago') }}">Metodos de pago</a>
         </div>
       </li>
@@ -53,7 +51,7 @@
           <a class="dropdown-item disabled" href="{{ route('getroles') }}">Roles</a>
         </div>
       </li>
-      
+
       <li class="nav-item">
         <a class="nav-link disabled {{ request()->is('resena*') ? 'active' : '' }}"
            href="{{ route('getresenas') }}">Reseñas</a>

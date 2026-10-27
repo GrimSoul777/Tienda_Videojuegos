@@ -2,23 +2,26 @@
 
 namespace App\View\Components;
 
+use App\Models\Cliente;
+use App\Models\MetodoPago;
+use App\Models\Usuario;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class UpdateVenta extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $clientes;
+    public $usuarios;
+    public $metodosPago;
+
+    public function __construct(public $i)
     {
-        //
+        $this->clientes = Cliente::orderBy('nombre')->get();
+        $this->usuarios = Usuario::all();
+        $this->metodosPago = MetodoPago::orderBy('nombre')->get();
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.update-venta');

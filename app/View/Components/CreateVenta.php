@@ -2,23 +2,29 @@
 
 namespace App\View\Components;
 
+use App\Models\Cliente;
+use App\Models\MetodoPago;
+use App\Models\Usuario;
+use App\Models\Videojuego;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class CreateVenta extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+    public $clientes;
+    public $usuarios;
+    public $metodosPago;
+    public $videojuegos;
+
     public function __construct()
     {
-        //
+        $this->clientes = Cliente::orderBy('nombre')->get();
+        $this->usuarios = Usuario::all();
+        $this->metodosPago = MetodoPago::orderBy('nombre')->get();
+        $this->videojuegos = Videojuego::orderBy('titulo')->get();
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.create-venta');
