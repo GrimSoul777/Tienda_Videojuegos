@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventario;
+use App\Models\Videojuego;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -11,7 +12,12 @@ class InventarioController extends Controller
     {
         $inventario = Inventario::with('videojuego')->get();
 
-        return view('inventario', compact('inventario'));
+        $videojuegos = Videojuego::whereNotIn(
+        'id_videojuego',
+        Inventario::select('id_videojuego')
+        )->get();
+
+        return view('inventario', compact('inventario', 'videojuegos'));
     }
 
     public function createInventario(Request $request)
@@ -55,9 +61,15 @@ class InventarioController extends Controller
     public function deleteInventario($id)
     {
         $inventario = Inventario::findOrFail($id);
+
+        if ($inventario->stock > 0) {
+            return redirect()->route('getinventario')
+            ->with('error', 'No puedes eliminar un inventario con existencias.');
+        }
+
         $inventario->delete();
 
         return redirect()->route('getinventario')
-            ->with('mensaje', 'Registro de inventario eliminado');
+        ->with('mensaje', 'Registro de inventario eliminado');
     }
 }

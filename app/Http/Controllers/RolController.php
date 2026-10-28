@@ -11,7 +11,7 @@ class RolController extends Controller
     {
         $roles = Rol::all();
 
-        return view('rol', compact('roles'));
+        return view('roles', compact('roles'));
     }
 
     public function createRol(Request $request)

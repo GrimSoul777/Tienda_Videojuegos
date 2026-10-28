@@ -3,36 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resena;
+use App\Models\Videojuego;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ResenaController extends Controller
 {
     public function getResenas()
     {
-        $resenas = Resena::with([
-            'cliente',
-            'videojuego'
-        ])->get();
+        $resenas = Resena::with(['usuario', 'videojuego'])->get();
+        $videojuegos = Videojuego::all();
 
-        return view('resena', compact('resenas'));
+        return view('resenas', compact(
+            'resenas',
+            'videojuegos'
+        ));
     }
 
     public function createResena(Request $request)
     {
+        $usuario = Auth::user();
+
+        // Solo los usuarios con rol Cliente pueden crear reseñas.
+        if ($usuario->rol?->nombre !== 'Cliente') {
+            abort(403, 'No tienes permiso para crear reseñas.');
+        }
+
         $request->validate([
-            'id_cliente' => 'required|exists:clientes,id_cliente',
             'id_videojuego' => 'required|exists:videojuegos,id_videojuego',
             'calificacion' => 'required|integer|min:1|max:5',
             'comentario' => 'nullable|string'
         ]);
 
-        $request->validate([
-            'id_cliente' => 'unique:resenas,id_cliente,NULL,id_resena,id_videojuego,' .
-                $request->id_videojuego
-        ]);
+        // Comprobar si el usuario ya reseñó este videojuego.
+        $existe = Resena::where('id_usuario', $usuario->id_usuario)
+            ->where('id_videojuego', $request->id_videojuego)
+            ->exists();
 
+        if ($existe) {
+            return back()->withErrors([
+                'id_videojuego' => 'Ya has publicado una reseña para este videojuego.'
+            ])->withInput();
+        }
+
+        // Guardar la reseña con el usuario que inició sesión.
         Resena::create([
-            'id_cliente' => $request->id_cliente,
+            'id_usuario' => $usuario->id_usuario,
             'id_videojuego' => $request->id_videojuego,
             'calificacion' => $request->calificacion,
             'comentario' => $request->comentario,
@@ -46,6 +62,15 @@ class ResenaController extends Controller
     public function updateResena($id, Request $request)
     {
         $resena = Resena::findOrFail($id);
+        $usuario = Auth::user();
+
+        // Verificar que sea un cliente y que la reseña sea suya.
+        abort_unless(
+            $usuario->rol?->nombre === 'Cliente'
+            && $resena->id_usuario == $usuario->id_usuario,
+            403,
+            'No tienes permiso para editar esta reseña.'
+        );
 
         $request->validate([
             'calificacion' => 'required|integer|min:1|max:5',
@@ -64,6 +89,16 @@ class ResenaController extends Controller
     public function deleteResena($id)
     {
         $resena = Resena::findOrFail($id);
+        $usuario = Auth::user();
+
+        // Verificar que sea un cliente y que la reseña sea suya.
+        abort_unless(
+            $usuario->rol?->nombre === 'Cliente'
+            && $resena->id_usuario == $usuario->id_usuario,
+            403,
+            'No tienes permiso para eliminar esta reseña.'
+        );
+
         $resena->delete();
 
         return redirect()->route('getresenas')

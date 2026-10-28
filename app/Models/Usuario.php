@@ -32,4 +32,11 @@ class Usuario extends Model
     {
         return $this->hasMany(Venta::class, 'id_usuario', 'id_usuario');
     }
+
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 }

@@ -86,6 +86,14 @@ class VideojuegoController extends Controller
     public function deleteVideojuego($id)
     {
         $videojuego = Videojuego::findOrFail($id);
+
+        $inventario = $videojuego->inventario;
+
+        if ($inventario && $inventario->stock > 0) {
+            return redirect()->route('getvideojuegos')
+                ->with('error', 'No puedes eliminar un videojuego que todavía tiene existencias.');
+        }
+
         $videojuego->delete();
 
         return redirect()->route('getvideojuegos')

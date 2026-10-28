@@ -12,7 +12,7 @@ class Resena extends Model
     protected $primaryKey = 'id_resena';
 
     protected $fillable = [
-        'id_cliente',
+        'id_usuario',
         'id_videojuego',
         'calificacion',
         'comentario',
@@ -27,13 +27,21 @@ class Resena extends Model
         ];
     }
 
-    public function cliente(): BelongsTo
+    public function usuario(): BelongsTo
     {
-        return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
+        return $this->belongsTo(
+            User::class,
+            'id_usuario',
+            'id_usuario'
+        );
     }
 
     public function videojuego(): BelongsTo
     {
-        return $this->belongsTo(Videojuego::class, 'id_videojuego', 'id_videojuego');
+        return $this->belongsTo(
+            Videojuego::class,
+            'id_videojuego',
+            'id_videojuego'
+        );
     }
 }
