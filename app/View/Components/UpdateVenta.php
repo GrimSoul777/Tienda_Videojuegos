@@ -18,7 +18,11 @@ class UpdateVenta extends Component
     public function __construct(public $i)
     {
         $this->clientes = Cliente::orderBy('nombre')->get();
-        $this->usuarios = Usuario::all();
+
+        $this->usuarios = Usuario::whereHas('rol', function ($query) {
+            $query->whereIn('nombre', ['Administrador', 'Empleado']);
+        })->orderBy('nombre')->get();
+
         $this->metodosPago = MetodoPago::orderBy('nombre')->get();
     }
 

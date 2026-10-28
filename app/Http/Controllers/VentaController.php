@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Venta;
 use App\Models\Videojuego;
 use App\Models\Inventario;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -19,6 +20,11 @@ class VentaController extends Controller
             'metodoPago',
             'detalles.videojuego'
         ])->get();
+
+        // Obtener únicamente usuarios que no sean clientes.
+        $usuarios = User::whereHas('rol', function ($query) {
+            $query->where('nombre', '!=', 'Cliente');
+        })->get();
 
         return view('venta', compact('ventas'));
     }

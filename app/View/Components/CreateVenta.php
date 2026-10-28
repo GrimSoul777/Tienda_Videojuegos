@@ -20,7 +20,12 @@ class CreateVenta extends Component
     public function __construct()
     {
         $this->clientes = Cliente::orderBy('nombre')->get();
-        $this->usuarios = Usuario::all();
+
+        // Obtener únicamente administradores y empleados.
+        $this->usuarios = Usuario::whereHas('rol', function ($query) {
+            $query->whereIn('nombre', ['Administrador', 'Empleado']);
+        })->orderBy('nombre')->get();
+
         $this->metodosPago = MetodoPago::orderBy('nombre')->get();
         $this->videojuegos = Videojuego::orderBy('titulo')->get();
     }
