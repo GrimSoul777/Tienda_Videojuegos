@@ -35,7 +35,7 @@
             @endif
           </div>
           <div class="mb-2">
-            <input class="form-control form-control-sm" type="number" name="telefono" minlenght="10" maxlength="15" value="{{ $mio ? old('telefono') : $i->telefono }}" placeholder="Teléfono (opcional)">
+            <input class="form-control form-control-sm" type="tel" name="telefono" minlenght="10" maxlength="15" pattern="[0-9]{10,15}" value="{{ $mio ? old('telefono') : $i->telefono }}" placeholder="Teléfono (opcional)">
             @if ($mio) @error('telefono') <small class="text-danger">{{ $message }}</small> @enderror 
             @endif
           </div>

@@ -20,7 +20,7 @@ class ClienteController extends Controller
             'nombre' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'email' => 'nullable|email|unique:clientes,email',
-            'telefono' => 'nullable|string|max:20'
+            'telefono' => 'nullable|digits_between:10,15|unique:clientes,telefono'
         ]);
 
         Cliente::create([
@@ -42,7 +42,7 @@ class ClienteController extends Controller
             'nombre' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'email' => 'nullable|email|unique:clientes,email,' . $id . ',id_cliente',
-            'telefono' => 'nullable|string|max:20'
+            'telefono' => 'nullable|digits_between:10,15|unique:clientes,telefono'
         ]);
 
         $cliente->update([
